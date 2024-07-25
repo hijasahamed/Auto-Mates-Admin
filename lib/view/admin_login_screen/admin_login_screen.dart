@@ -3,10 +3,10 @@ import 'package:auto_mates_admin/view/admin_login_screen/admin_login_image/admin
 import 'package:flutter/material.dart';
 
 class AdminLoginScreen extends StatelessWidget {
-  const AdminLoginScreen({super.key,required this.screenSize});
-  final Size screenSize;
+  const AdminLoginScreen({super.key});
   @override
   Widget build(BuildContext context) {
+    final screenSize = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: Colors.grey[200],
       body: SizedBox(
