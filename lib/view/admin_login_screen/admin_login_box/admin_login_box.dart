@@ -29,7 +29,7 @@ class AdminLoginBox extends StatelessWidget {
               children: [
                 TextWidget(text: 'Admin Login', color: Colors.blueGrey, size: screenSize.width/60, weight: FontWeight.bold),
                 AdminLoginTextForm(screenSize: screenSize,labelText: 'Username',prefixIcon: Icons.person,controller: userNameController,),
-                AdminLoginTextForm(screenSize: screenSize,labelText: 'Password',prefixIcon: Icons.remove_red_eye,controller: userPasswordController,),
+                AdminLoginTextForm(screenSize: screenSize,labelText: 'Password',prefixIcon: Icons.remove_red_eye,controller: userPasswordController,obscure: true,),
                 SizedBox(height: screenSize.height/30,),
                 AdminLoginButton(screenSize: screenSize,userNameController: userNameController,userPasswordController: userPasswordController,)
               ],

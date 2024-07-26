@@ -6,18 +6,22 @@ class AdminLoginTextForm extends StatelessWidget {
     required this.labelText,
     required this.screenSize,
     required this.prefixIcon,
-    required this.controller
+    required this.controller,
+    this.obscure
     });
     final Size screenSize;
   final String labelText;
   final IconData prefixIcon;
   final TextEditingController controller;
+  final bool? obscure;
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: TextFormField(
         controller: controller,
+        obscureText: (obscure == true)? true : false,
+        obscuringCharacter: '*',
         decoration: InputDecoration(
           labelText: labelText,
           labelStyle: TextStyle(

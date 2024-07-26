@@ -1,6 +1,7 @@
 import 'package:auto_mates_admin/controller/functions.dart';
 import 'package:auto_mates_admin/view/common_widgets/text_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class AdminLoginButton extends StatelessWidget {
   const AdminLoginButton({super.key,required this.screenSize,required this.userNameController,required this.userPasswordController});
@@ -12,8 +13,8 @@ class AdminLoginButton extends StatelessWidget {
     return Material(
         color: Colors.transparent,
         child: InkWell(
-          onTap: () async {
-            loginAdmin(userPasswordController: userPasswordController, userNameController: userNameController);
+          onTap: ()  {
+            loginAdmin(userPasswordController: userPasswordController, userNameController: userNameController);           
           },
           child: Ink(
             height: screenSize.height/14,
