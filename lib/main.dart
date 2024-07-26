@@ -1,5 +1,5 @@
 import 'package:auto_mates_admin/model/firebase/firebase_options.dart';
-import 'package:auto_mates_admin/view/admin_login_screen/admin_login_screen.dart';
+import 'package:auto_mates_admin/view/admin_home_screen/admin_home_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const AdminLoginScreen(),
+      home: const AdminHomeScreen(),
     );
   }
 }

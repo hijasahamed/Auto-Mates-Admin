@@ -1,5 +1,6 @@
 import 'package:auto_mates_admin/view/admin_login_screen/admin_login_box/admin_login_box.dart';
 import 'package:auto_mates_admin/view/admin_login_screen/admin_login_image/admin_login_image.dart';
+import 'package:auto_mates_admin/view/common_widgets/colors.dart';
 import 'package:flutter/material.dart';
 
 class AdminLoginScreen extends StatelessWidget {
@@ -8,7 +9,7 @@ class AdminLoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: Colors.grey[200],
+      backgroundColor: loginBackgroundColor,
       body: SizedBox(
         height: screenSize.height,
         width: screenSize.width,

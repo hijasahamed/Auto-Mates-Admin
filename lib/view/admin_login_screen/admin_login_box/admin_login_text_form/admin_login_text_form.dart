@@ -1,3 +1,4 @@
+import 'package:auto_mates_admin/view/common_widgets/colors.dart';
 import 'package:flutter/material.dart';
 
 class AdminLoginTextForm extends StatelessWidget {
@@ -28,7 +29,7 @@ class AdminLoginTextForm extends StatelessWidget {
             color: Colors.grey[700],fontSize: screenSize.width/80,
           ),
           filled: true,
-          fillColor: Colors.grey[200],
+          fillColor: loginBackgroundColor,
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
             borderSide: BorderSide.none,
