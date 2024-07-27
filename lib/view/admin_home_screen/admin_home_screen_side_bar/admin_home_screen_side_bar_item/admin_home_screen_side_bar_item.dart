@@ -10,7 +10,7 @@ class AdminHomeScreenSideBarItem extends StatelessWidget {
   final String label;
   final AdminHomeScreenController controller;
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) {    
     final screenSize = MediaQuery.of(context).size;
     return Padding(
       padding:  EdgeInsets.only(bottom: screenSize.width/100,top: screenSize.width/100),
@@ -23,14 +23,14 @@ class AdminHomeScreenSideBarItem extends StatelessWidget {
             height: screenSize.height/15,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(screenSize.width/200),
-              color: controller.selectedIndex.value == index ? Colors.blue : Colors.grey,
+              color: controller.selectedIndex.value == index ? colorblue : sideBarItemColor,
             ),
             child: Center(
               child: TextWidget(
                 text: label, 
-                color: controller.selectedIndex.value == index ? colorWhite : Colors.black,
+                color: controller.selectedIndex.value == index ? colorWhite : colorWhite,
                 size: screenSize.width/100, 
-                weight: FontWeight.bold
+                weight: FontWeight.w100
               ),
             ),
           )),

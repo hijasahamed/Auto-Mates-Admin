@@ -12,21 +12,17 @@ class AdminHomeScreenSideBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.only(topRight: Radius.circular(screenSize.width/100),bottomRight: Radius.circular(screenSize.width/100)),
-          color: const Color.fromARGB(255, 48, 48, 48),
-        ),
+        color: sideBarColor,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [  
             Padding(
               padding:  EdgeInsets.only(bottom: screenSize.width/100,top: screenSize.width/100),
-              child: TextWidget(text: 'AutoMates', color: colorWhite, size: screenSize.width/50, weight: FontWeight.bold),
-            ),          
+              child: TextWidget(text: 'AutoMates', color: colorWhite, size: screenSize.width/45, weight: FontWeight.w500),
+            ),
             AdminHomeScreenSideBarItem(index: 0, label: 'Overview', controller: controller),
-            AdminHomeScreenSideBarItem(index: 1, label: 'Item 2', controller: controller),
-            AdminHomeScreenSideBarItem(index: 2, label: 'Item 3', controller: controller),
-            AdminHomeScreenSideBarItem(index: 3, label: 'Item 4', controller: controller),
+            AdminHomeScreenSideBarItem(index: 1, label: 'Sellers', controller: controller),
+            AdminHomeScreenSideBarItem(index: 2, label: 'Users', controller: controller),
           ],
         ),
       )
