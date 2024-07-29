@@ -1,4 +1,7 @@
+import 'package:auto_mates_admin/controller/admin_controllers.dart';
+import 'package:auto_mates_admin/controller/firebase_controller.dart';
 import 'package:auto_mates_admin/view/admin_home_screen/admin_home_screen.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -62,4 +65,33 @@ void loginAdmin ({required userPasswordController,required userNameController,co
       dismissDirection: DismissDirection.horizontal
     );
   }
+}
+
+void blockAndUnblockUsers({user,adminusercontroller}){
+  Get.defaultDialog(
+    title: adminusercontroller.isBlocked.value ? 'Unblock User' : 'Block User',
+      middleText: adminusercontroller.isBlocked.value
+          ? 'Do you want to unblock the user?'
+          : 'Do you want to block the user?',
+    backgroundColor: Colors.white,
+    textCancel: 'Cancel',
+    cancelTextColor: Colors.red,
+    textConfirm: adminusercontroller.isBlocked.value ? 'Unblock' : 'Block',
+    confirmTextColor: Colors.white,                                            
+    onConfirm: () async {
+      var querySnapshot = await FirebaseFirestore.instance
+          .collection('blocked_users')
+          .where('userId', isEqualTo: user['id'])
+          .get();
+      if (querySnapshot.docs.isEmpty) {
+        await FirestoreService().addUserToblockedList(user: user);
+        await FirestoreService().blockAndRemoveUser(docId: user['id']);   
+        Get.back();
+      } else {
+        await FirestoreService().addBlockedUserToUserList(user: user);
+        await FirestoreService().removeBlockedUser(docId: user['id']);
+        Get.back();
+      }
+    },
+  );
 }

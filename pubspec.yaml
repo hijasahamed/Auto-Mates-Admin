@@ -36,6 +36,7 @@ dependencies:
   flutter:
     sdk: flutter
   get: ^4.6.6
+  rxdart: ^0.28.0
 
 dev_dependencies:
   flutter_lints: ^3.0.0

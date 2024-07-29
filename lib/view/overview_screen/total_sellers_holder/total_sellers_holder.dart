@@ -1,17 +1,17 @@
-import 'package:auto_mates_admin/controller/admin_home_screen_controller.dart';
+import 'package:auto_mates_admin/controller/admin_controllers.dart';
 import 'package:auto_mates_admin/view/common_widgets/colors.dart';
 import 'package:auto_mates_admin/view/common_widgets/text_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class TotalSellersHolder extends StatelessWidget {
-  const TotalSellersHolder({super.key,required this.screenSize,required this.controller});
+  const TotalSellersHolder({super.key,required this.screenSize,required this.adminHomeScreenController});
   final Size screenSize;
-  final AdminHomeScreenController controller;
+  final AdminHomeScreenController adminHomeScreenController;
   @override
   Widget build(BuildContext context) {    
     return InkWell(
-      onTap: () => controller.changePage(1),
+      onTap: () => adminHomeScreenController.changePage(1),
       child: Ink(
         height: screenSize.height/5,
         width: screenSize.width/5,

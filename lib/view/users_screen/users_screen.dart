@@ -1,17 +1,15 @@
 import 'package:auto_mates_admin/controller/firebase_controller.dart';
+import 'package:auto_mates_admin/controller/functions.dart';
 import 'package:auto_mates_admin/view/common_widgets/colors.dart';
 import 'package:auto_mates_admin/view/common_widgets/text_widget.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:auto_mates_admin/view/users_screen/blocked_screen/block_unblock_button/block_unblock_button.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-
 class UsersScreen extends StatelessWidget {
   const UsersScreen({super.key, required this.screenSize});
   final Size screenSize;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) {   
     return Scaffold(
       backgroundColor: colorBlack,
       body: Padding(
@@ -140,26 +138,7 @@ class UsersScreen extends StatelessWidget {
                                       weight: FontWeight.normal,
                                     )),
                                     DataCell(
-                                      ElevatedButton(
-                                        style: ButtonStyle(
-                                          backgroundColor:
-                                              WidgetStateProperty.all(
-                                                  Colors.red),
-                                        ),
-                                        onPressed: () {
-                                          Get.defaultDialog(
-                                            title: 'Block User',
-                                            middleText: 'Do you want to Block the user',
-                                            backgroundColor: Colors.red
-                                          );
-                                        },
-                                        child: TextWidget(
-                                          text: 'Block',
-                                          color: colorWhite,
-                                          size: screenSize.width / 150,
-                                          weight: FontWeight.w600,
-                                        ),
-                                      ),
+                                      BlockUnblockButton(user: user)
                                     ),
                                   ],
                                 );
@@ -179,5 +158,3 @@ class UsersScreen extends StatelessWidget {
     );
   }
 }
-
-

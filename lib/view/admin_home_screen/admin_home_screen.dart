@@ -1,4 +1,4 @@
-import 'package:auto_mates_admin/controller/admin_home_screen_controller.dart';
+import 'package:auto_mates_admin/controller/admin_controllers.dart';
 import 'package:auto_mates_admin/view/admin_home_screen/admin_home_screen_side_bar/admin_home_screen_side_bar.dart';
 import 'package:auto_mates_admin/view/common_widgets/colors.dart';
 import 'package:auto_mates_admin/view/overview_screen/overview_screen.dart';
@@ -12,9 +12,9 @@ class AdminHomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
-    final AdminHomeScreenController controller = Get.put(AdminHomeScreenController());
+    final AdminHomeScreenController adminHomeScreenController = Get.put(AdminHomeScreenController());
     final List<Widget> pages = [
-      OverviewScreen(screenSize: screenSize,controller: controller,), 
+      OverviewScreen(screenSize: screenSize,adminHomeScreenController: adminHomeScreenController,), 
       SellersScreen(screenSize: screenSize,),
       UsersScreen(screenSize: screenSize,)
     ];
@@ -23,12 +23,12 @@ class AdminHomeScreen extends StatelessWidget {
       body: SafeArea(
         child: Row(
           children: [
-            AdminHomeScreenSideBar(screenSize: screenSize, controller: controller),
+            AdminHomeScreenSideBar(screenSize: screenSize, adminHomeScreenController: adminHomeScreenController),
             Expanded(
               flex: 5,
               child: Container(
                 color: colorBlack,
-                child: Obx(() => pages[controller.selectedIndex.value]),
+                child: Obx(() => pages[adminHomeScreenController.selectedIndex.value]),
               )
             )
           ],
