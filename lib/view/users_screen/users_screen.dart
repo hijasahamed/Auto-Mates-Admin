@@ -166,35 +166,33 @@ class UsersScreen extends StatelessWidget {
                   ),
                   SizedBox(
                     height: screenSize.height * 0.05,
-                    child: Obx(() {
-                      return Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          IconButton(
-                            icon: Icon(Icons.arrow_back, color: adminUserController.currentPage.value > 0 ? colorWhite : Colors.grey),
-                            onPressed: adminUserController.currentPage.value > 0
-                                ? () {
-                                    adminUserController.previousPage();
-                                  }
-                                : null,
-                          ),
-                          TextWidget(
-                            text: '${adminUserController.currentPage.value + 1} / $totalPages',
-                            color: colorWhite,
-                            size: screenSize.width / 100,
-                            weight: FontWeight.w500,
-                          ),
-                          IconButton(
-                            icon: Icon(Icons.arrow_forward, color: adminUserController.currentPage.value < totalPages - 1 ? colorWhite : Colors.grey),
-                            onPressed: adminUserController.currentPage.value < totalPages - 1
-                                ? () {
-                                    adminUserController.nextPage();
-                                  }
-                                : null,
-                          ),
-                        ],
-                      );
-                    }),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        IconButton(
+                          icon: Icon(Icons.arrow_back, color: adminUserController.currentPage.value > 0 ? colorWhite : Colors.grey),
+                          onPressed: adminUserController.currentPage.value > 0
+                              ? () {
+                                  adminUserController.currentPage--;
+                                }
+                              : null,
+                        ),
+                        TextWidget(
+                          text: '${adminUserController.currentPage.value + 1} / $totalPages',
+                          color: colorWhite,
+                          size: screenSize.width / 100,
+                          weight: FontWeight.w500,
+                        ),
+                        IconButton(
+                          icon: Icon(Icons.arrow_forward, color: adminUserController.currentPage.value < totalPages - 1 ? colorWhite : Colors.grey),
+                          onPressed: adminUserController.currentPage.value < totalPages - 1
+                              ? () {
+                                  adminUserController.currentPage++;
+                                }
+                              : null,
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               );

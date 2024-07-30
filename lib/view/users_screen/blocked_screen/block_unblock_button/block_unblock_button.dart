@@ -1,5 +1,5 @@
 import 'package:auto_mates_admin/controller/admin_controllers.dart';
-import 'package:auto_mates_admin/controller/functions.dart';
+import 'package:auto_mates_admin/controller/function_controllers.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

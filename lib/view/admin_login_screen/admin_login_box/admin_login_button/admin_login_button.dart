@@ -1,4 +1,4 @@
-import 'package:auto_mates_admin/controller/functions.dart';
+import 'package:auto_mates_admin/controller/function_controllers.dart';
 import 'package:auto_mates_admin/view/common_widgets/text_widget.dart';
 import 'package:flutter/material.dart';
 
