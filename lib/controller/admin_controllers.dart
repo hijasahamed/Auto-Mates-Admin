@@ -1,38 +1,33 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 
-class AdminHomeScreenController extends GetxController{
-
+class AdminHomeScreenController extends GetxController {
   var selectedIndex = 0.obs;
 
   void changePage(int index) {
     selectedIndex.value = index;
   }
-  
 }
 
 class AdminUserController extends GetxController {
-  var isBlocked = false.obs;
-  String? blockedUserId;
 
-  Future<String?> checkIfUserBlocked(String userId) async {
-    var querySnapshot = await FirebaseFirestore.instance
+  Stream<bool> userBlockStatusStream(String userId) {
+    return FirebaseFirestore.instance
         .collection('blocked_users')
         .where('userId', isEqualTo: userId)
-        .get();
-
-    if (querySnapshot.docs.isNotEmpty) {
-      isBlocked.value = true;
-      blockedUserId = querySnapshot.docs.first.get('userId');
-    } else {
-      isBlocked.value = false;
-      blockedUserId = null;
-    }
-    
-    return blockedUserId;
+        .snapshots()
+        .map((snapshot) => snapshot.docs.isNotEmpty);
   }
 
-  bool isUserBlocked(String userId) {
-    return blockedUserId == userId;
+  var currentPage = 0.obs;
+  final dynamic rowsPerPage = 5;
+
+  void nextPage() {
+    currentPage.value++;
   }
+
+  void previousPage() {
+    currentPage.value--;
+  }
+
 }

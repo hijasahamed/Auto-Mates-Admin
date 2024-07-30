@@ -6,30 +6,36 @@ import 'package:get/get.dart';
 class BlockUnblockButton extends StatelessWidget {
   BlockUnblockButton({super.key,required this.user});
   final Map<String, dynamic> user;
-  final AdminUserController adminusercontroller = Get.put(AdminUserController());
+  final AdminUserController adminUserController = Get.put(AdminUserController());
 
   @override
   Widget build(BuildContext context) {
-    adminusercontroller.checkIfUserBlocked(user['id']);
-    return Obx(() {
-      return ElevatedButton(
-        style: ButtonStyle(
-          backgroundColor: WidgetStateProperty.all(
-            adminusercontroller.isUserBlocked(user['id']) ? Colors.green : Colors.red,
+    return StreamBuilder<bool>(
+      stream: adminUserController.userBlockStatusStream(user['id']),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(child: CircularProgressIndicator(color: Colors.blue,));
+        }        
+        bool isUserBlocked = snapshot.data ?? false;
+        return ElevatedButton(
+          style: ButtonStyle(
+            backgroundColor: WidgetStateProperty.all(
+              isUserBlocked ? Colors.green : Colors.red,
+            ),
           ),
-        ),
-        onPressed: () {
-          blockAndUnblockUsers(user: user,adminusercontroller: adminusercontroller);
-        },
-        child: Text(
-          adminusercontroller.isBlocked.value ? 'Unblock' : 'Block',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: MediaQuery.of(context).size.width / 150,
-            fontWeight: FontWeight.w600,
+          onPressed: () {
+            blockAndUnblockUsers(user: user, isUserBlocked: isUserBlocked);
+          },
+          child: Text(
+            isUserBlocked ? 'Unblock' : 'Block',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: MediaQuery.of(context).size.width / 150,
+              fontWeight: FontWeight.w600,
+            ),
           ),
-        ),
-      );
-    });
+        );
+      },
+    );
   }
 }

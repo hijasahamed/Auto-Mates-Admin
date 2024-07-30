@@ -67,16 +67,16 @@ void loginAdmin ({required userPasswordController,required userNameController,co
   }
 }
 
-void blockAndUnblockUsers({user,adminusercontroller}){
+void blockAndUnblockUsers({user,isUserBlocked}){
   Get.defaultDialog(
-    title: adminusercontroller.isBlocked.value ? 'Unblock User' : 'Block User',
-      middleText: adminusercontroller.isBlocked.value
+    title: isUserBlocked ? 'Unblock User' : 'Block User',
+      middleText: isUserBlocked
           ? 'Do you want to unblock the user?'
           : 'Do you want to block the user?',
     backgroundColor: Colors.white,
     textCancel: 'Cancel',
     cancelTextColor: Colors.red,
-    textConfirm: adminusercontroller.isBlocked.value ? 'Unblock' : 'Block',
+    textConfirm: isUserBlocked ? 'Unblock' : 'Block',
     confirmTextColor: Colors.white,                                            
     onConfirm: () async {
       var querySnapshot = await FirebaseFirestore.instance
