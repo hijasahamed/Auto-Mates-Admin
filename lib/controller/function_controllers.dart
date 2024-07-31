@@ -1,5 +1,6 @@
 import 'package:auto_mates_admin/controller/firebase_controller.dart';
 import 'package:auto_mates_admin/view/admin_home_screen/admin_home_screen.dart';
+import 'package:auto_mates_admin/view/common_widgets/colors.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -89,6 +90,35 @@ void blockAndUnblockUsers({user,isUserBlocked}){
       } else {
         await FirestoreService().addBlockedUserToUserList(user: user);
         await FirestoreService().removeBlockedUser(docId: user['id']);
+        Get.back();
+      }
+    },
+  );
+}
+
+void blockAndUnblockSellers({seller,isSellerBlocked}){
+  Get.defaultDialog(
+    title: isSellerBlocked ? 'Unblock Seller' : 'Block Seller',
+      middleText: isSellerBlocked
+          ? 'Do you want to unblock the seller?'
+          : 'Do you want to block the seller?',
+    backgroundColor: colorWhite,
+    textCancel: 'Cancel',
+    cancelTextColor: Colors.red,
+    textConfirm: isSellerBlocked ? 'Unblock' : 'Block',
+    confirmTextColor: Colors.white,                                            
+    onConfirm: () async {
+      var querySnapshot = await FirebaseFirestore.instance
+          .collection('blocked_sellers')
+          .where('sellerId', isEqualTo: seller['id'])
+          .get();
+      if (querySnapshot.docs.isEmpty) {
+        await FirestoreService().addSellerToBlockedList(seller: seller);
+        await FirestoreService().blockAndRemoveSeller(docId: seller['id']);   
+        Get.back();
+      } else { 
+        await FirestoreService().addBlockedSellersToSellersList(seller: seller);
+        await FirestoreService().removeBlockedSellers(docId: seller['id']);      
         Get.back();
       }
     },

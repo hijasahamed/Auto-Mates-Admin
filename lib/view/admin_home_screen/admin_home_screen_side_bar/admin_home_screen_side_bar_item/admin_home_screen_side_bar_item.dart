@@ -23,7 +23,7 @@ class AdminHomeScreenSideBarItem extends StatelessWidget {
             height: screenSize.height/15,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(screenSize.width/200),
-              color: controller.selectedIndex.value == index ? colorblue : sideBarItemColor,
+              color: controller.selectedIndex.value == index ? colorBlueGrey : sideBarItemColor,
             ),
             child: Center(
               child: TextWidget(

@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class BlockUnblockButton extends StatelessWidget {
-  BlockUnblockButton({super.key,required this.user});
+  BlockUnblockButton({super.key,required this.user,required this.screenSize});
   final Map<String, dynamic> user;
+  final Size screenSize;
   final AdminUserController adminUserController = Get.put(AdminUserController());
-
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<bool>(
@@ -30,7 +30,7 @@ class BlockUnblockButton extends StatelessWidget {
             isUserBlocked ? 'Unblock' : 'Block',
             style: TextStyle(
               color: Colors.white,
-              fontSize: MediaQuery.of(context).size.width / 150,
+              fontSize: screenSize.width / 150,
               fontWeight: FontWeight.w600,
             ),
           ),

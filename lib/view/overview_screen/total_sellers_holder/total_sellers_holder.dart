@@ -17,7 +17,7 @@ class TotalSellersHolder extends StatelessWidget {
         width: screenSize.width/5,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(screenSize.width/100),
-          color: colorWhite
+          color: sideBarColor
         ),
         child: Padding(
           padding: EdgeInsets.all(screenSize.width/100),
@@ -26,7 +26,7 @@ class TotalSellersHolder extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  TextWidget(text: 'Total Sellers', color: colorBlueGrey, size: screenSize.width/100, weight: FontWeight.bold),
+                  TextWidget(text: 'Total Sellers', color: colorWhite, size: screenSize.width/100, weight: FontWeight.bold),
                   const Icon(Icons.verified,color: Colors.green,)
                 ],
               ),
@@ -39,13 +39,13 @@ class TotalSellersHolder extends StatelessWidget {
                         return const CircularProgressIndicator(color: Colors.blue,);
                       }
                       if (snapshot.hasError) {
-                        return TextWidget(text: 'No documents found', color: colorBlueGrey, size: screenSize.width/100, weight: FontWeight.w500);
+                        return TextWidget(text: 'No documents found', color: colorWhite, size: screenSize.width/100, weight: FontWeight.w500);
                       }
                       if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-                        return TextWidget(text: 'No documents found', color: colorBlueGrey, size: screenSize.width/100, weight: FontWeight.w500);
+                        return TextWidget(text: 'No documents found', color: colorWhite, size: screenSize.width/100, weight: FontWeight.w500);
                       }
                       final count = snapshot.data!.docs.length;
-                      return TextWidget(text: count.toString(), color: Colors.grey, size: screenSize.width/30, weight: FontWeight.bold);
+                      return TextWidget(text: count.toString(), color: colorWhite, size: screenSize.width/30, weight: FontWeight.bold);
                     },
                   ),
                 )

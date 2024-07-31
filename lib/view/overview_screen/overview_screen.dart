@@ -31,7 +31,7 @@ class OverviewScreen extends StatelessWidget {
                   width: screenSize.width/5,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(screenSize.width/100),
-                    color: colorWhite
+                    color: sideBarColor
                   ),
                 ),
               ],
