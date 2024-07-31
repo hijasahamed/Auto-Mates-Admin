@@ -81,7 +81,7 @@ class SellersTable extends StatelessWidget {
                         ),
                         DataColumn(
                           label: TextWidget(
-                            text: 'Verification',
+                            text: 'Subscription',
                             color: colorWhite,
                             size: screenSize.width / 100,
                             weight: FontWeight.w500,
@@ -131,8 +131,8 @@ class SellersTable extends StatelessWidget {
                               weight: FontWeight.normal,
                             )),
                             DataCell(TextWidget(
-                              text: 'Verified',
-                              color: colorWhite,
+                              text: 'Subscribed',
+                              color: Colors.green,
                               size: screenSize.width / 100,
                               weight: FontWeight.normal,
                             )),
