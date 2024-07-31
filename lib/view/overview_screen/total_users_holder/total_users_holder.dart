@@ -2,7 +2,6 @@ import 'package:auto_mates_admin/controller/admin_controllers.dart';
 import 'package:auto_mates_admin/controller/firebase_controller.dart';
 import 'package:auto_mates_admin/view/common_widgets/colors.dart';
 import 'package:auto_mates_admin/view/common_widgets/text_widget.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class TotalUsersHolder extends StatelessWidget {
