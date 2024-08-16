@@ -16,7 +16,7 @@ class AdminHomeScreenSideBarItem extends StatelessWidget {
       padding:  EdgeInsets.only(bottom: screenSize.width/100,top: screenSize.width/100),
       child: Material(
         color: Colors.transparent,
-        child: InkWell(          
+        child: InkWell(         
           onTap: () => controller.changePage(index),
           child: Obx(() => Ink(
             width: screenSize.width/8,
