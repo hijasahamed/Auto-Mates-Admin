@@ -1,6 +1,7 @@
 import 'package:auto_mates_admin/controller/admin_controllers.dart';
 import 'package:auto_mates_admin/view/common_widgets/colors.dart';
 import 'package:auto_mates_admin/view/common_widgets/text_widget.dart';
+import 'package:auto_mates_admin/view/overview_screen/blocked_sellers_users_holder/blocked_sellers_users_holder.dart';
 import 'package:auto_mates_admin/view/overview_screen/total_sellers_holder/total_sellers_holder.dart';
 import 'package:auto_mates_admin/view/overview_screen/total_users_holder/total_users_holder.dart';
 import 'package:flutter/material.dart';
@@ -26,14 +27,7 @@ class OverviewScreen extends StatelessWidget {
               children: [
                 TotalSellersHolder(screenSize: screenSize,adminHomeScreenController: adminHomeScreenController,),
                 TotalUsersHolder(screenSize: screenSize,adminHomeScreenController: adminHomeScreenController,),
-                Container(
-                  height: screenSize.height/5,
-                  width: screenSize.width/5,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(screenSize.width/100),
-                    color: sideBarColor
-                  ),
-                ),
+                BlockedSellersUsersHolder(screenSize: screenSize),
               ],
             )
           ],

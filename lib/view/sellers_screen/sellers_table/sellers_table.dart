@@ -131,10 +131,10 @@ class SellersTable extends StatelessWidget {
                               weight: FontWeight.normal,
                             )),
                             DataCell(TextWidget(
-                              text: 'Subscribed',
-                              color: Colors.green,
+                              text: seller['plan'] == 'subscribed' ? 'Subscribed' : 'UnSubscribed',
+                              color: seller['plan'] == 'subscribed' ? Colors.green : Colors.red,
                               size: screenSize.width / 100,
-                              weight: FontWeight.normal,
+                              weight: FontWeight.w500,
                             )),
                             DataCell(SellersBlockUnblockButton(screenSize: screenSize,seller: seller,))
                           ],
