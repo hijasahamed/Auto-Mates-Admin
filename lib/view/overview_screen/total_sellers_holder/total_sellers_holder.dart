@@ -45,7 +45,7 @@ class TotalSellersHolder extends StatelessWidget {
                         return TextWidget(text: 'No documents found', color: colorWhite, size: screenSize.width/100, weight: FontWeight.w500);
                       }
                       final count = snapshot.data!.docs.length;
-                      return TextWidget(text: count.toString(), color: colorWhite, size: screenSize.width/30, weight: FontWeight.bold);
+                      return TextWidget(text: count.toString(), color: colorWhite, size: screenSize.width/60, weight: FontWeight.bold);
                     },
                   ),
                 )

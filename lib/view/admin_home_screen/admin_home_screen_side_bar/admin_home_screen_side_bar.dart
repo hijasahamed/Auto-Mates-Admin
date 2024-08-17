@@ -21,8 +21,9 @@ class AdminHomeScreenSideBar extends StatelessWidget {
               child: TextWidget(text: 'AutoMates', color: colorWhite, size: screenSize.width/45, weight: FontWeight.w500),
             ),
             AdminHomeScreenSideBarItem(index: 0, label: 'Overview', controller: adminHomeScreenController),
-            AdminHomeScreenSideBarItem(index: 1, label: 'Sellers', controller: adminHomeScreenController),
-            AdminHomeScreenSideBarItem(index: 2, label: 'Users', controller: adminHomeScreenController),
+            AdminHomeScreenSideBarItem(index: 1, label: 'Total Sellers', controller: adminHomeScreenController),
+            AdminHomeScreenSideBarItem(index: 2, label: 'Total Users', controller: adminHomeScreenController),
+            AdminHomeScreenSideBarItem(index: 3, label: 'Total Revenue', controller: adminHomeScreenController),
           ],
         ),
       )

@@ -36,7 +36,7 @@ class AdminUserController extends GetxController {
 
 class AdminSellerController extends GetxController{
 
-Stream<bool> sellerBlockStatusStream({sellerId}) {
+  Stream<bool> sellerBlockStatusStream({sellerId}) {
     return FirebaseFirestore.instance
         .collection('blocked_sellers')
         .where('sellerId', isEqualTo: sellerId)

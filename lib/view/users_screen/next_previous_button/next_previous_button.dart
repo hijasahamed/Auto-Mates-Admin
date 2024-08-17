@@ -7,10 +7,10 @@ class NextPreviousButton extends StatelessWidget {
   const NextPreviousButton(
       {super.key,
       required this.screenSize,
-      required this.adminUserController,
+      required this.controller,
       required this.totalPages});
   final Size screenSize;
-  final AdminUserController adminUserController;
+  final dynamic controller;
   final int totalPages;
   @override
   Widget build(BuildContext context) {
@@ -21,29 +21,29 @@ class NextPreviousButton extends StatelessWidget {
         children: [
           IconButton(
             icon: Icon(Icons.arrow_back,
-                color: adminUserController.currentPage.value > 0
+                color: controller.currentPage.value > 0
                     ? colorWhite
                     : Colors.grey),
-            onPressed: adminUserController.currentPage.value > 0
+            onPressed: controller.currentPage.value > 0
                 ? () {
-                    adminUserController.previousPage();
+                    controller.previousPage();
                   }
                 : null,
           ),
           TextWidget(
-            text: '${adminUserController.currentPage.value + 1} / $totalPages',
+            text: '${controller.currentPage.value + 1} / $totalPages',
             color: colorWhite,
             size: screenSize.width / 100,
             weight: FontWeight.w500,
           ),
           IconButton(
             icon: Icon(Icons.arrow_forward,
-                color: adminUserController.currentPage.value < totalPages - 1
+                color: controller.currentPage.value < totalPages - 1
                     ? colorWhite
                     : Colors.grey),
-            onPressed: adminUserController.currentPage.value < totalPages - 1
+            onPressed: controller.currentPage.value < totalPages - 1
                 ? () {
-                    adminUserController.nextPage();
+                    controller.nextPage();
                   }
                 : null,
           ),

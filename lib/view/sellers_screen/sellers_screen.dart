@@ -3,6 +3,7 @@ import 'package:auto_mates_admin/controller/firebase_controller.dart';
 import 'package:auto_mates_admin/view/common_widgets/colors.dart';
 import 'package:auto_mates_admin/view/common_widgets/text_widget.dart';
 import 'package:auto_mates_admin/view/sellers_screen/sellers_table/sellers_table.dart';
+import 'package:auto_mates_admin/view/users_screen/next_previous_button/next_previous_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -57,6 +58,7 @@ class SellersScreen extends StatelessWidget {
                             adminSellerController: adminSellerController,
                             totalPages: totalPages,
                             displayedSellers: displayedSellers),
+                        NextPreviousButton(screenSize: screenSize, controller: adminSellerController, totalPages: totalPages)
                       ],
                     );
                   }

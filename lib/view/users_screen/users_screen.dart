@@ -67,7 +67,7 @@ class UsersScreen extends StatelessWidget {
                           displayedUsers: displayedUsers),
                       NextPreviousButton(
                           screenSize: screenSize,
-                          adminUserController: adminUserController,
+                          controller: adminUserController,
                           totalPages: totalPages)
                     ],
                   );
