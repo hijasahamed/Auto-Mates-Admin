@@ -57,7 +57,7 @@ class TotalRevenueEarned extends StatelessWidget {
   const TotalRevenueEarned({
     super.key,
     required this.screenSize,
-    this.isRevenueScreen
+    this.isRevenueScreen,
   });
 
   final Size screenSize;
@@ -65,42 +65,46 @@ class TotalRevenueEarned extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Widget revenueWidget = StreamBuilder<QuerySnapshot>(
+      stream: FirebaseFirestore.instance.collection('revenue').snapshots(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const CircularProgressIndicator(color: Colors.blue);
+        }
+        if (snapshot.hasError) {
+          return TextWidget(
+            text: 'No documents found',
+            color: colorWhite,
+            size: screenSize.width / 100,
+            weight: FontWeight.w500,
+          );
+        }
+        if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+          return TextWidget(
+            text: '0',
+            color: colorWhite,
+            size: screenSize.width / 30,
+            weight: FontWeight.w500,
+          );
+        }
+        final totalAmount = snapshot.data!.docs
+            .map((doc) => (doc['amount'] as num?) ?? 0)
+            .reduce((value, element) => value + element);
+        return TextWidget(
+          text: '₹${totalAmount.toString()}',
+          color: (isRevenueScreen == true) ? Colors.green : colorWhite,
+          size: screenSize.width / 60,
+          weight: FontWeight.bold,
+        );
+      },
+    );
+
+    if (isRevenueScreen == true) {
+      return revenueWidget;
+    }
+
     return Expanded(
-      child: Center(
-        child: StreamBuilder<QuerySnapshot>(
-          stream: FirebaseFirestore.instance.collection('revenue').snapshots(),
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return const CircularProgressIndicator(color: Colors.blue);
-            }
-            if (snapshot.hasError) {
-              return TextWidget(
-                text: 'No documents found',
-                color: colorWhite,
-                size: screenSize.width / 100,
-                weight: FontWeight.w500,
-              );
-            }
-            if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-              return TextWidget(
-                text: '0',
-                color: colorWhite,
-                size: screenSize.width / 30,
-                weight: FontWeight.w500,
-              );
-            }
-            final totalAmount = snapshot.data!.docs
-                .map((doc) => (doc['amount'] as num?) ?? 0)
-                .reduce((value, element) => value + element);
-            return TextWidget(
-              text: '₹${totalAmount.toString()}',
-              color: (isRevenueScreen == true)? Colors.green : colorWhite,
-              size: screenSize.width / 60,
-              weight: FontWeight.bold,
-            );
-          },
-        ),
-      ),
+      child: Center(child: revenueWidget),
     );
   }
 }

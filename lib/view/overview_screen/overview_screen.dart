@@ -4,7 +4,10 @@ import 'package:auto_mates_admin/view/common_widgets/text_widget.dart';
 import 'package:auto_mates_admin/view/overview_screen/revenue_earned_holder/revenue_earned_holder.dart';
 import 'package:auto_mates_admin/view/overview_screen/total_sellers_holder/total_sellers_holder.dart';
 import 'package:auto_mates_admin/view/overview_screen/total_users_holder/total_users_holder.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class OverviewScreen extends StatelessWidget {
   const OverviewScreen({super.key,required this.screenSize,required this.adminHomeScreenController});
@@ -29,7 +32,7 @@ class OverviewScreen extends StatelessWidget {
                 TotalUsersHolder(screenSize: screenSize,adminHomeScreenController: adminHomeScreenController,),
                 RevenueEarnedHolder(screenSize: screenSize,adminHomeScreenController: adminHomeScreenController,),
               ],
-            )
+            ),
           ],
         ),
       )
