@@ -4,6 +4,7 @@ import 'package:auto_mates_admin/view/common_widgets/text_widget.dart';
 import 'package:auto_mates_admin/view/overview_screen/all_cars_to_sell_holder/all_cars_to_sell_holder.dart';
 import 'package:auto_mates_admin/view/overview_screen/featured_cars_holder/featured_cars_holder.dart';
 import 'package:auto_mates_admin/view/overview_screen/revenue_earned_holder/revenue_earned_holder.dart';
+import 'package:auto_mates_admin/view/overview_screen/revenue_graph/revenue_graph.dart';
 import 'package:auto_mates_admin/view/overview_screen/sold_cars_holder/sold_cars_holder.dart';
 import 'package:auto_mates_admin/view/overview_screen/total_sellers_holder/total_sellers_holder.dart';
 import 'package:auto_mates_admin/view/overview_screen/total_users_holder/total_users_holder.dart';
@@ -19,7 +20,7 @@ class OverviewScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: colorBlack,
       body: Padding(
-        padding: EdgeInsets.all(screenSize.width/50),
+        padding: EdgeInsets.all(screenSize.width/120),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -43,6 +44,8 @@ class OverviewScreen extends StatelessWidget {
                 FeaturedCarsHolder(adminHomeScreenController: adminHomeScreenController, screenSize: screenSize)
               ],
             ),
+            SizedBox(height: screenSize.height/25,),
+            Expanded(child: RevenuePieChart(screenSize: screenSize,))
           ],
         ),
       )

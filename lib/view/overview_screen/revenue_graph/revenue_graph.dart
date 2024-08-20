@@ -1,106 +1,156 @@
+import 'package:auto_mates_admin/view/common_widgets/colors.dart';
+import 'package:auto_mates_admin/view/common_widgets/text_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
-class RevenueGraph extends StatelessWidget {
-  const RevenueGraph({super.key});
+class RevenuePieChart extends StatelessWidget {
+  const RevenuePieChart({super.key,required this.screenSize});
+  final Size screenSize;
+  Future<Map<String, double>> fetchRevenueData() async {
+    QuerySnapshot snapshot = await FirebaseFirestore.instance.collection('revenue').get();
+
+    Map<String, double> groupedData = {};
+
+    for (var doc in snapshot.docs) {
+      final data = doc.data() as Map<String, dynamic>;
+      final paymentMethod = data['paidFor'] as String? ?? 'Unknown';
+      final amount = (data['amount'] as num?)?.toDouble() ?? 0.0;
+
+      if (groupedData.containsKey(paymentMethod)) {
+        groupedData[paymentMethod] = groupedData[paymentMethod]! + amount;
+      } else {
+        groupedData[paymentMethod] = amount;
+      }
+    }
+    return groupedData;
+  }
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<QuerySnapshot>(
-      stream: FirebaseFirestore.instance.collection('revenue').snapshots(),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(child: CircularProgressIndicator());
-        }
-        if (snapshot.hasError) {
-          return const Center(child: Text('Error loading data'));
-        }
-        if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-          return const Center(child: Text('No revenue data available'));
-        }
-
-        final revenueByMonth = <String, double>{};
-
-        for (var doc in snapshot.data!.docs) {
-          final amount = (doc['amount'] as num?)?.toDouble() ?? 0.0;
-          final timestamp = (doc['paidDateTime'] as Timestamp?)?.toDate();
-          if (timestamp != null) {
-            final monthKey = DateFormat('MMM yyyy').format(timestamp);
-            revenueByMonth.update(monthKey, (value) => value + amount,
-                ifAbsent: () => amount);
-          }
-        }
-
-        final spots = revenueByMonth.entries.map((entry) {
-          final index =
-              revenueByMonth.keys.toList().indexOf(entry.key).toDouble();
-          final revenue = entry.value;
-          return FlSpot(index, revenue);
-        }).toList();
-
-        return Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: LineChart(
-            LineChartData(
-              titlesData: FlTitlesData(
-                leftTitles: AxisTitles(
-                  sideTitles: SideTitles(
-                    showTitles: true,
-                    getTitlesWidget: (value, _) {
-                      return Text(
-                        '₹${value.toStringAsFixed(0)}',
-                        style: const TextStyle(color: Colors.white),
-                      );
-                    },
-                    reservedSize: 40,
-                  ),
-                ),
-                bottomTitles: AxisTitles(
-                  sideTitles: SideTitles(
-                    showTitles: true,
-                    getTitlesWidget: (value, _) {
-                      final monthLabels = revenueByMonth.keys.toList();
-                      if (value.toInt() < monthLabels.length) {
-                        return Text(
-                          monthLabels[value.toInt()],
-                          style: const TextStyle(color: Colors.white),
-                        );
-                      }
-                      return const SizedBox();
-                    },
-                    interval: 1,
-                    reservedSize: 60,
-                  ),
-                ),
-              ),
-              gridData: FlGridData(show: true),
-              borderData: FlBorderData(show: true),
-              lineBarsData: [
-                LineChartBarData(
-                  spots: spots,
-                  isCurved: true,
-                  barWidth: 3,
-                  color: Colors.blueAccent,
-                  belowBarData: BarAreaData(
-                    show: true,
-                    gradient: LinearGradient(
-                      colors: [
-                        Colors.blue.withOpacity(0.3),
-                        Colors.blue.withOpacity(0.1),
-                      ],
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
+    return Scaffold(
+      backgroundColor: colorBlack,
+      body: Column(
+        children: [
+          TextWidget(text: 'Revenue Chart', color: colorWhite, size: screenSize.width/80, weight: FontWeight.bold),
+          FutureBuilder<Map<String, double>>(
+            future: fetchRevenueData(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Center(child: CircularProgressIndicator());
+              }
+          
+              if (snapshot.hasError) {
+                return const Center(child: Text('Error loading revenue data'));
+              }
+          
+              if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                return const Center(child: Text('No revenue data available'));
+              }
+          
+              final groupedData = snapshot.data!;
+              List<PieChartSectionData> pieSections = groupedData.entries.map((entry) {
+                return PieChartSectionData(
+                  color: getColorForPaymentMethod(entry.key),
+                );
+              }).toList();
+          
+              return Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  children: [
+                    Expanded(
+                      flex: 1,
+                      child: SizedBox(
+                        height: 200,
+                        child: PieChart(
+                          PieChartData(
+                            sections: pieSections,
+                            centerSpaceRadius: 30,
+                            sectionsSpace: 2,
+                            borderData: FlBorderData(show: false),
+                          ),
+                        ),
+                      ),
                     ),
-                  ),
-                  dotData: const FlDotData(show: true),
+                    Expanded(
+                      flex: 1,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: groupedData.entries.map((entry) {
+                          return Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 4.0),
+                            child: Row(
+                              children: [
+                                Container(
+                                  width: 16,
+                                  height: 16,
+                                  color: getColorForPaymentMethod(entry.key),
+                                ),
+                                const SizedBox(width: 8),
+                                Expanded(
+                                  child: Text(
+                                    entry.key,
+                                    style: const TextStyle(color: Colors.blue, fontSize: 14),
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          );
+                        }).toList(),
+                      ),
+                    ),
+                    Expanded(
+                      flex: 1,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: groupedData.entries.map((entry) {
+                          return Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 4.0),
+                            child: Row(
+                              children: [
+                                Container(
+                                  width: 16,
+                                  height: 16,
+                                  color: getColorForPaymentMethod(entry.key),
+                                ),
+                                const SizedBox(width: 8),
+                                Expanded(
+                                  child: Text(
+                                    '₹${entry.value.toString()}',
+                                    style: const TextStyle(color: Colors.blue, fontSize: 14),
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          );
+                        }).toList(),
+                      ),
+                    ),
+                  ],
                 ),
-              ],
-            ),
+              );
+            },
           ),
-        );
-      },
+        ],
+      ),
     );
   }
+
+  Color getColorForPaymentMethod(String method) {
+    switch (method.toString()) {
+      case 'Marking Interest':
+        return Colors.blue;
+      case 'Seller Premium Subscription':
+        return Colors.green;
+      case 'Featuring Car':
+        return Colors.orange;
+      default:
+        return Colors.grey;
+    }
+  }
 }
+
+
