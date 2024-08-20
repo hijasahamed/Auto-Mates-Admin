@@ -1,3 +1,4 @@
+import 'package:auto_mates_admin/controller/function_controllers.dart';
 import 'package:auto_mates_admin/view/common_widgets/colors.dart';
 import 'package:auto_mates_admin/view/common_widgets/text_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -26,7 +27,7 @@ class AllCarToSellScreen extends StatelessWidget {
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return const Center(
-                    child: CircularProgressIndicator(),
+                    child: CircularProgressIndicator(color: colorWhite,),
                   );
                 }
 
@@ -51,31 +52,34 @@ class AllCarToSellScreen extends StatelessWidget {
                   itemCount: cars.length,
                   itemBuilder: (context, index) {
                     final car = cars[index];
-                    final carName = car['brand'] ?? 'No Name';
-                    final carPrice = car['price'] ?? 'No Price';
-
                     return Card(
                       color: Colors.grey[850],
                       margin: const EdgeInsets.symmetric(vertical: 8.0),
                       child: ListTile(
-                        title: Text(
-                          carName,
-                          style: TextStyle(
-                            color: colorWhite,
-                            fontSize: screenSize.width / 80,
-                          ),
+                        title: Row(
+                          children: [
+                            TextWidget(text: car['brand'], color: colorWhite, size: screenSize.width/80, weight: FontWeight.bold),
+                            SizedBox(width: screenSize.width/180,),
+                            TextWidget(text: car['modelName'], color: colorWhite, size: screenSize.width/100, weight: FontWeight.bold),
+                          ],
                         ),
-                        subtitle: Text(
-                          'Price: ₹$carPrice',
-                          style: TextStyle(
-                            color: Colors.grey[400],
-                            fontSize: screenSize.width / 90,
-                          ),
+                        subtitle: Row(
+                          children: [                            
+                            TextWidget(text: 'Price: ₹${car['price']}', color: Colors.grey, size: screenSize.width / 90, weight: FontWeight.bold),
+                            SizedBox(width: screenSize.width/150,),
+                            TextWidget(text: 'Seller: ${car['sellerName']}', color: Colors.grey, size: screenSize.width / 90, weight: FontWeight.bold),
+                          ],
                         ),
                         leading: Icon(
                           Icons.directions_car,
                           color: Colors.blueAccent,
                           size: screenSize.width / 50,
+                        ),
+                        trailing: TextButton(
+                          onPressed: () {
+                            deleteCarToSellAlertDialog(car: car);
+                          }, 
+                          child: TextWidget(text: 'Remove', color: colorWhite, size: screenSize.width/120, weight: FontWeight.bold)
                         ),
                       ),
                     );

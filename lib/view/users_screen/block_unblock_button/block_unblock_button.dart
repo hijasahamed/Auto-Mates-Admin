@@ -24,7 +24,7 @@ class BlockUnblockButton extends StatelessWidget {
             ),
           ),
           onPressed: () {
-            blockAndUnblockUsers(user: user, isUserBlocked: isUserBlocked);
+            blockAndUnblockUsersAlertDialog(user: user, isUserBlocked: isUserBlocked);
           },
           child: Text(
             isUserBlocked ? 'Unblock' : 'Block',

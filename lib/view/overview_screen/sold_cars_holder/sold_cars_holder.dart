@@ -4,14 +4,14 @@ import 'package:auto_mates_admin/view/common_widgets/text_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-class AllCarsToSellHolder extends StatelessWidget {
-  const AllCarsToSellHolder({super.key,required this.screenSize,required this.adminHomeScreenController});
+class SoldCarsHolder extends StatelessWidget {
+  const SoldCarsHolder({super.key,required this.screenSize,required this.adminHomeScreenController});
   final Size screenSize;
   final AdminHomeScreenController adminHomeScreenController;
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => adminHomeScreenController.changePage(4),
+      onTap: () => adminHomeScreenController.changePage(5),
       child: Ink(
         height: screenSize.height/5,
         width: screenSize.width/5,
@@ -26,14 +26,14 @@ class AllCarsToSellHolder extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  TextWidget(text: 'Total Cars To Sell', color: colorWhite, size: screenSize.width/100, weight: FontWeight.bold),
-                  const Icon(Icons.car_rental_sharp,color: Colors.blue,)
+                  TextWidget(text: 'Sold Cars', color: colorWhite, size: screenSize.width/100, weight: FontWeight.bold),
+                  const Icon(Icons.check_circle, color: Colors.green)
                 ],
               ),
               Expanded(
                 child: Center(
                   child: StreamBuilder<QuerySnapshot>(
-                    stream: FirebaseFirestore.instance.collection('carstosell').snapshots(),
+                    stream: FirebaseFirestore.instance.collection('soldcars').snapshots(),
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
                         return const CircularProgressIndicator(color: Colors.blue,);
@@ -41,7 +41,7 @@ class AllCarsToSellHolder extends StatelessWidget {
                       if (snapshot.hasError) {
                         return TextWidget(text: 'No documents found', color: colorWhite, size: screenSize.width/100, weight: FontWeight.w500);
                       }
-                      if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+                      if (!snapshot.hasData) {
                         return TextWidget(text: 'No documents found', color: colorWhite, size: screenSize.width/100, weight: FontWeight.w500);
                       }
                       final count = snapshot.data!.docs.length;

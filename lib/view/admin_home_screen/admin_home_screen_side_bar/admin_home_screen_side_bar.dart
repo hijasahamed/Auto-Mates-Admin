@@ -25,6 +25,7 @@ class AdminHomeScreenSideBar extends StatelessWidget {
             AdminHomeScreenSideBarItem(index: 2, label: 'Total Users', controller: adminHomeScreenController),
             AdminHomeScreenSideBarItem(index: 3, label: 'Total Revenue', controller: adminHomeScreenController),
             AdminHomeScreenSideBarItem(index: 4, label: 'All Cars', controller: adminHomeScreenController),
+            AdminHomeScreenSideBarItem(index: 5, label: 'Sold Cars', controller: adminHomeScreenController),
           ],
         ),
       )

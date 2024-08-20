@@ -19,7 +19,7 @@ class SellersBlockUnblockButton extends StatelessWidget {
         bool isSellerBlocked = snapshot.data ?? false;
         return TextButton(        
           onPressed: () {
-            blockAndUnblockSellers(isSellerBlocked: isSellerBlocked,seller: seller);
+            blockAndUnblockSellersAlertDialog(isSellerBlocked: isSellerBlocked,seller: seller);
           },
           child: Text(
             isSellerBlocked ? 'Unblock' : 'Block',

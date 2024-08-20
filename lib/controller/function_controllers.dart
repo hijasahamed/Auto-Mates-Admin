@@ -67,7 +67,7 @@ void loginAdmin ({required userPasswordController,required userNameController,co
   }
 }
 
-void blockAndUnblockUsers({user,isUserBlocked}){
+void blockAndUnblockUsersAlertDialog({user,isUserBlocked}){
   Get.defaultDialog(
     title: isUserBlocked ? 'Unblock User' : 'Block User',
       middleText: isUserBlocked
@@ -96,7 +96,7 @@ void blockAndUnblockUsers({user,isUserBlocked}){
   );
 }
 
-void blockAndUnblockSellers({seller,isSellerBlocked}){
+void blockAndUnblockSellersAlertDialog({seller,isSellerBlocked}){
   Get.defaultDialog(
     title: isSellerBlocked ? 'Unblock Seller' : 'Block Seller',
       middleText: isSellerBlocked
@@ -120,6 +120,40 @@ void blockAndUnblockSellers({seller,isSellerBlocked}){
         await FirestoreService().addBlockedSellersToSellersList(seller: seller);
         await FirestoreService().removeBlockedSellers(docId: seller['id']);      
         Get.back();
+      }
+    },
+  );
+}
+
+void deleteCarToSellAlertDialog({car}){
+  Get.defaultDialog(
+    title: 'Remove This Car',
+    middleText: 'Removing this car will Permenantly remove it.',
+    backgroundColor: colorWhite,
+    textCancel: 'Cancel',
+    cancelTextColor: Colors.red,
+    textConfirm: 'Delete',
+    confirmTextColor: Colors.white,                                            
+    onConfirm: () async {
+      try {
+        await FirebaseFirestore.instance
+            .collection('carstosell')
+            .doc(car.id)
+            .delete();
+        Get.back();
+        Get.snackbar(
+          'Success',
+          'The car has been successfully deleted.',
+          backgroundColor: Colors.green,
+          colorText: Colors.white,
+        );
+      } catch (e) {
+        Get.snackbar(
+          'Error',
+          'Failed to delete the car. Please try again.',
+          backgroundColor: Colors.red,
+          colorText: Colors.white,
+        );
       }
     },
   );
