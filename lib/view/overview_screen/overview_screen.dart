@@ -2,6 +2,7 @@ import 'package:auto_mates_admin/controller/admin_controllers.dart';
 import 'package:auto_mates_admin/view/common_widgets/colors.dart';
 import 'package:auto_mates_admin/view/common_widgets/text_widget.dart';
 import 'package:auto_mates_admin/view/overview_screen/all_cars_to_sell_holder/all_cars_to_sell_holder.dart';
+import 'package:auto_mates_admin/view/overview_screen/featured_cars_holder/featured_cars_holder.dart';
 import 'package:auto_mates_admin/view/overview_screen/revenue_earned_holder/revenue_earned_holder.dart';
 import 'package:auto_mates_admin/view/overview_screen/sold_cars_holder/sold_cars_holder.dart';
 import 'package:auto_mates_admin/view/overview_screen/total_sellers_holder/total_sellers_holder.dart';
@@ -38,9 +39,10 @@ class OverviewScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 AllCarsToSellHolder(screenSize: screenSize, adminHomeScreenController: adminHomeScreenController),
-                SoldCarsHolder(screenSize: screenSize, adminHomeScreenController: adminHomeScreenController)
+                SoldCarsHolder(screenSize: screenSize, adminHomeScreenController: adminHomeScreenController),
+                FeaturedCarsHolder(adminHomeScreenController: adminHomeScreenController, screenSize: screenSize)
               ],
-            )
+            ),
           ],
         ),
       )

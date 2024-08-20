@@ -3,6 +3,7 @@ import 'package:auto_mates_admin/view/common_widgets/colors.dart';
 import 'package:auto_mates_admin/view/common_widgets/text_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class RevenueEarnedHolder extends StatelessWidget {
   const RevenueEarnedHolder({
@@ -90,8 +91,9 @@ class TotalRevenueEarned extends StatelessWidget {
         final totalAmount = snapshot.data!.docs
             .map((doc) => (doc['amount'] as num?) ?? 0)
             .reduce((value, element) => value + element);
+        final formattedAmount = NumberFormat.decimalPattern('en_IN').format(totalAmount);
         return TextWidget(
-          text: '₹${totalAmount.toString()}',
+          text: '₹${formattedAmount.toString()}',
           color: (isRevenueScreen == true) ? Colors.green : colorWhite,
           size: screenSize.width / 60,
           weight: FontWeight.bold,

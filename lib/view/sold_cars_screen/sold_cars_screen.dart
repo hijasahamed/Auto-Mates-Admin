@@ -43,6 +43,9 @@ class SoldCarsScreen extends StatelessWidget {
                     itemCount: soldCars.length,
                     itemBuilder: (context, index) {
                       final carData = soldCars[index].data() as Map<String, dynamic>;
+                      int buyPrice = int.tryParse(carData['boughtPrice'].toString().replaceAll(',', '')) ?? 0;
+                      int soldPrice = int.tryParse(carData['soldAmount'].toString().replaceAll(',', '')) ?? 0;
+                      int profit = soldPrice - buyPrice;
                       return Card(
                         color: Colors.grey[850],
                         margin: EdgeInsets.symmetric(vertical: screenSize.height / 80),
@@ -95,7 +98,7 @@ class SoldCarsScreen extends StatelessWidget {
                               ),
                               SizedBox(width: screenSize.width/30,),
                               TextWidget(
-                                text: 'Seller Profit ₹${carData['soldAmount'] - carData['boughtPrice']}',
+                                text: 'Seller Profit: ₹$profit',
                                 color: colorWhite,
                                 size: screenSize.width / 120,
                                 weight: FontWeight.bold,

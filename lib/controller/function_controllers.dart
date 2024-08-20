@@ -158,3 +158,38 @@ void deleteCarToSellAlertDialog({car}){
     },
   );
 }
+
+
+void deleteFeaturedCar({car}){
+  Get.defaultDialog(
+    title: 'Remove This Featured Car',
+    middleText: 'Removing this car will Permenantly remove it.',
+    backgroundColor: colorWhite,
+    textCancel: 'Cancel',
+    cancelTextColor: Colors.red,
+    textConfirm: 'Delete',
+    confirmTextColor: Colors.white,                                            
+    onConfirm: () async {
+      try {
+        await FirebaseFirestore.instance
+            .collection('featuredCars')
+            .doc(car.id)
+            .delete();
+        Get.back();
+        Get.snackbar(
+          'Success',
+          'The car has been successfully deleted.',
+          backgroundColor: Colors.green,
+          colorText: Colors.white,
+        );
+      } catch (e) {
+        Get.snackbar(
+          'Error',
+          'Failed to delete the car. Please try again.',
+          backgroundColor: Colors.red,
+          colorText: Colors.white,
+        );
+      }
+    },
+  );
+}
