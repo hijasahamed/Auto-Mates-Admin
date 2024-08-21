@@ -4,8 +4,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
-class RevenuePieChart extends StatelessWidget {
-  const RevenuePieChart({super.key,required this.screenSize});
+class RevenuePieChartHolder extends StatelessWidget {
+  const RevenuePieChartHolder({super.key,required this.screenSize});
   final Size screenSize;
   Future<Map<String, double>> fetchRevenueData() async {
     QuerySnapshot snapshot = await FirebaseFirestore.instance.collection('revenue').get();
@@ -31,6 +31,7 @@ class RevenuePieChart extends StatelessWidget {
     return Scaffold(
       backgroundColor: colorBlack,
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           TextWidget(text: 'Revenue Chart', color: colorWhite, size: screenSize.width/80, weight: FontWeight.bold),
           FutureBuilder<Map<String, double>>(
