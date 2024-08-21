@@ -13,21 +13,23 @@ class AdminHomeScreenSideBar extends StatelessWidget {
     return Expanded(
       child: Container(
         color: sideBarColor,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [  
-            Padding(
-              padding:  EdgeInsets.only(bottom: screenSize.width/100,top: screenSize.width/100),
-              child: TextWidget(text: 'AutoMates', color: colorWhite, size: screenSize.width/45, weight: FontWeight.w500),
-            ),
-            AdminHomeScreenSideBarItem(index: 0, label: 'Overview', controller: adminHomeScreenController),
-            AdminHomeScreenSideBarItem(index: 1, label: 'Total Sellers', controller: adminHomeScreenController),
-            AdminHomeScreenSideBarItem(index: 2, label: 'Total Users', controller: adminHomeScreenController),
-            AdminHomeScreenSideBarItem(index: 3, label: 'Total Revenue', controller: adminHomeScreenController),
-            AdminHomeScreenSideBarItem(index: 4, label: 'All Cars', controller: adminHomeScreenController),
-            AdminHomeScreenSideBarItem(index: 5, label: 'Sold Cars', controller: adminHomeScreenController),
-            AdminHomeScreenSideBarItem(index: 6, label: 'Featured Cars', controller: adminHomeScreenController),
-          ],
+        child: Padding(
+          padding: EdgeInsets.all(screenSize.width/100),
+          child: ListView(
+            children: [  
+              Align(
+                alignment: Alignment.center,
+                child: TextWidget(text: 'AutoMates', color: colorWhite, size: screenSize.width/45, weight: FontWeight.w500)
+              ),
+              AdminHomeScreenSideBarItem(index: 0, label: 'Overview', controller: adminHomeScreenController,labelSize: screenSize.width/100,),
+              AdminHomeScreenSideBarItem(index: 1, label: 'Total Sellers', controller: adminHomeScreenController,labelSize: screenSize.width/100,),
+              AdminHomeScreenSideBarItem(index: 2, label: 'Total Users', controller: adminHomeScreenController,labelSize: screenSize.width/100,),
+              AdminHomeScreenSideBarItem(index: 3, label: 'Total Revenue', controller: adminHomeScreenController,labelSize: screenSize.width/100,),
+              AdminHomeScreenSideBarItem(index: 4, label: 'All Cars', controller: adminHomeScreenController,labelSize: screenSize.width/100,),
+              AdminHomeScreenSideBarItem(index: 5, label: 'Sold Cars', controller: adminHomeScreenController,labelSize: screenSize.width/100,),
+              AdminHomeScreenSideBarItem(index: 6, label: 'Featured Cars', controller: adminHomeScreenController,labelSize: screenSize.width/100,),
+            ],
+          ),
         ),
       )
     );

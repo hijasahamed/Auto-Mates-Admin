@@ -8,47 +8,120 @@ import 'package:auto_mates_admin/view/overview_screen/revenue_graph_holder/reven
 import 'package:auto_mates_admin/view/overview_screen/sold_cars_holder/sold_cars_holder.dart';
 import 'package:auto_mates_admin/view/overview_screen/total_sellers_holder/total_sellers_holder.dart';
 import 'package:auto_mates_admin/view/overview_screen/total_users_holder/total_users_holder.dart';
+import 'package:auto_mates_admin/view/responsive.dart';
 import 'package:flutter/material.dart';
 
 
 class OverviewScreen extends StatelessWidget {
-  const OverviewScreen({super.key,required this.screenSize,required this.adminHomeScreenController});
+  const OverviewScreen({super.key, required this.screenSize, required this.adminHomeScreenController});
   final Size screenSize;
   final AdminHomeScreenController adminHomeScreenController;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: colorBlack,
-      body: Padding(
-        padding: EdgeInsets.all(screenSize.width/120),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            TextWidget(text: 'Overview', color: colorWhite, size: screenSize.width/70, weight: FontWeight.w500),
-            const Divider(color: Colors.grey,),
-            SizedBox(height: screenSize.height/100,),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                TotalSellersHolder(screenSize: screenSize,adminHomeScreenController: adminHomeScreenController,),
-                TotalUsersHolder(screenSize: screenSize,adminHomeScreenController: adminHomeScreenController,),
-                RevenueEarnedHolder(screenSize: screenSize,adminHomeScreenController: adminHomeScreenController,),
-              ],
-            ),
-            SizedBox(height: screenSize.height/10,),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                AllCarsToSellHolder(screenSize: screenSize, adminHomeScreenController: adminHomeScreenController),
-                SoldCarsHolder(screenSize: screenSize, adminHomeScreenController: adminHomeScreenController),
-                FeaturedCarsHolder(adminHomeScreenController: adminHomeScreenController, screenSize: screenSize)
-              ],
-            ),
-            SizedBox(height: screenSize.height/25,),
-            Expanded(child: RevenuePieChartHolder(screenSize: screenSize,))
-          ],
+    if(Responsive.isDesktop(context) || Responsive.isTablet(context)){
+      return Scaffold(
+        backgroundColor: colorBlack,      
+        body: Padding(
+          padding: EdgeInsets.all(screenSize.width / 120),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              TextWidget(
+                text: 'Overview',
+                color: colorWhite,
+                size: screenSize.width / 70,
+                weight: FontWeight.bold,
+              ),
+              SizedBox(height: screenSize.height / 100),
+              SizedBox(
+                height: screenSize.height/5,
+                child: Row(
+                  children: [
+                    Expanded(child: TotalSellersHolder(screenSize: screenSize, adminHomeScreenController: adminHomeScreenController)),
+                    SizedBox(width: screenSize.width / 220),
+                    Expanded(child: TotalUsersHolder(screenSize: screenSize, adminHomeScreenController: adminHomeScreenController)),
+                    SizedBox(width: screenSize.width / 220),
+                    Expanded(child: RevenueEarnedHolder(screenSize: screenSize, adminHomeScreenController: adminHomeScreenController)),
+                  ],
+                ),
+              ),
+              SizedBox(height: screenSize.height / 100),
+              SizedBox(
+                height: screenSize.height/5,
+                child: Row(
+                  children: [
+                    Expanded(child: AllCarsToSellHolder(screenSize: screenSize, adminHomeScreenController: adminHomeScreenController)),
+                    SizedBox(width: screenSize.width / 220),
+                    Expanded(child: SoldCarsHolder(screenSize: screenSize, adminHomeScreenController: adminHomeScreenController)),
+                    SizedBox(width: screenSize.width / 220),
+                    Expanded(child: FeaturedCarsHolder(adminHomeScreenController: adminHomeScreenController, screenSize: screenSize)),
+                  ],
+                ),
+              ),
+              SizedBox(height: screenSize.height / 25),
+              TextWidget(
+                text: 'Revenue Chart',
+                color: colorWhite,
+                size: screenSize.width / 80,
+                weight: FontWeight.bold,
+              ),
+              Expanded(child: RevenuePieChartHolder(screenSize: screenSize)),
+            ],
+          ),
         ),
-      )
-    );
+      );
+    }
+    else{
+      return Scaffold(
+        backgroundColor: colorBlack,      
+        body: Padding(
+          padding: EdgeInsets.all(screenSize.width / 50),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              TextWidget(
+                text: 'Overview',
+                color: colorWhite,
+                size: screenSize.width / 25,
+                weight: FontWeight.bold,
+              ),
+              SizedBox(height: screenSize.height / 50),
+              SizedBox(
+                height: screenSize.height/8,
+                child: Row(
+                  children: [
+                    Expanded(child: TotalSellersHolder(screenSize: screenSize, adminHomeScreenController: adminHomeScreenController,)),
+                    SizedBox(width: screenSize.width / 150),
+                    Expanded(child: TotalUsersHolder(screenSize: screenSize, adminHomeScreenController: adminHomeScreenController)),                    
+                  ],
+                ),
+              ),
+              SizedBox(height: screenSize.height / 50),
+              SizedBox(
+                height: screenSize.height/8,
+                child: Row(
+                  children: [
+                    Expanded(child: RevenueEarnedHolder(screenSize: screenSize, adminHomeScreenController: adminHomeScreenController)),
+                    SizedBox(width: screenSize.width / 150),
+                    Expanded(child: AllCarsToSellHolder(screenSize: screenSize, adminHomeScreenController: adminHomeScreenController)),
+                  ],
+                ),
+              ),
+              SizedBox(height: screenSize.height / 50),
+              SizedBox(
+                height: screenSize.height/8,
+                child: Row(
+                  children: [
+                    Expanded(child: SoldCarsHolder(screenSize: screenSize, adminHomeScreenController: adminHomeScreenController)),
+                    SizedBox(width: screenSize.width / 150),
+                    Expanded(child: FeaturedCarsHolder(adminHomeScreenController: adminHomeScreenController, screenSize: screenSize)),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      );
+    }
   }
 }

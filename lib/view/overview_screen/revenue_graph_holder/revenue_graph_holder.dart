@@ -1,5 +1,4 @@
 import 'package:auto_mates_admin/view/common_widgets/colors.dart';
-import 'package:auto_mates_admin/view/common_widgets/text_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
@@ -31,14 +30,14 @@ class RevenuePieChartHolder extends StatelessWidget {
     return Scaffold(
       backgroundColor: colorBlack,
       body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          TextWidget(text: 'Revenue Chart', color: colorWhite, size: screenSize.width/80, weight: FontWeight.bold),
           FutureBuilder<Map<String, double>>(
             future: fetchRevenueData(),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Center(child: CircularProgressIndicator());
+                return const Center(child: CircularProgressIndicator(color: colorWhite,));
               }
           
               if (snapshot.hasError) {
@@ -53,22 +52,24 @@ class RevenuePieChartHolder extends StatelessWidget {
               List<PieChartSectionData> pieSections = groupedData.entries.map((entry) {
                 return PieChartSectionData(
                   color: getColorForPaymentMethod(entry.key),
+                  title: '',
+                  titleStyle: const TextStyle(color: colorWhite),
+                  value: entry.value
                 );
               }).toList();
           
               return Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: EdgeInsets.all(screenSize.width/100),
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Expanded(
                       flex: 1,
                       child: SizedBox(
-                        height: 200,
+                        height: screenSize.height/4,
                         child: PieChart(
                           PieChartData(
                             sections: pieSections,
-                            centerSpaceRadius: 30,
-                            sectionsSpace: 2,
                             borderData: FlBorderData(show: false),
                           ),
                         ),
@@ -80,19 +81,19 @@ class RevenuePieChartHolder extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: groupedData.entries.map((entry) {
                           return Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 4.0),
+                            padding: EdgeInsets.symmetric(vertical: screenSize.width/120),
                             child: Row(
                               children: [
                                 Container(
-                                  width: 16,
-                                  height: 16,
+                                  width: screenSize.width/100,
+                                  height: screenSize.width/100,
                                   color: getColorForPaymentMethod(entry.key),
                                 ),
-                                const SizedBox(width: 8),
+                                SizedBox(width: screenSize.width/100),
                                 Expanded(
                                   child: Text(
                                     entry.key,
-                                    style: const TextStyle(color: Colors.blue, fontSize: 14),
+                                    style: TextStyle(color: Colors.blue, fontSize: screenSize.width/100),
                                     overflow: TextOverflow.ellipsis,
                                   ),
                                 ),
@@ -108,19 +109,19 @@ class RevenuePieChartHolder extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: groupedData.entries.map((entry) {
                           return Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 4.0),
+                            padding: EdgeInsets.symmetric(vertical: screenSize.width/100),
                             child: Row(
                               children: [
                                 Container(
-                                  width: 16,
-                                  height: 16,
+                                  width: screenSize.width/100,
+                                  height: screenSize.width/100,
                                   color: getColorForPaymentMethod(entry.key),
                                 ),
-                                const SizedBox(width: 8),
+                                SizedBox(width: screenSize.width/100),
                                 Expanded(
                                   child: Text(
                                     '₹${entry.value.toString()}',
-                                    style: const TextStyle(color: Colors.blue, fontSize: 14),
+                                    style: TextStyle(color: Colors.blue, fontSize: screenSize.width/100),
                                     overflow: TextOverflow.ellipsis,
                                   ),
                                 ),

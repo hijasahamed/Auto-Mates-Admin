@@ -2,13 +2,16 @@ import 'package:auto_mates_admin/controller/admin_controllers.dart';
 import 'package:auto_mates_admin/view/common_widgets/colors.dart';
 import 'package:auto_mates_admin/view/common_widgets/text_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 
 class AdminHomeScreenSideBarItem extends StatelessWidget {
-  const AdminHomeScreenSideBarItem({super.key,required this.index,required this.label,required this.controller});
+  const AdminHomeScreenSideBarItem({super.key,required this.index,required this.label,required this.controller,required this.labelSize,this.isMobilescreen});
   final int index;
   final String label;
   final AdminHomeScreenController controller;
+  final double labelSize;
+  final bool? isMobilescreen;
   @override
   Widget build(BuildContext context) {    
     final screenSize = MediaQuery.of(context).size;
@@ -17,7 +20,12 @@ class AdminHomeScreenSideBarItem extends StatelessWidget {
       child: Material(
         color: Colors.transparent,
         child: InkWell(         
-          onTap: () => controller.changePage(index),
+          onTap: () {
+            controller.changePage(index);
+            if(isMobilescreen==true){
+              Get.back();
+            }
+          },
           child: Obx(() => Ink(
             width: screenSize.width/8,
             height: screenSize.height/15,
@@ -29,7 +37,7 @@ class AdminHomeScreenSideBarItem extends StatelessWidget {
               child: TextWidget(
                 text: label, 
                 color: controller.selectedIndex.value == index ? colorWhite : colorWhite,
-                size: screenSize.width/100, 
+                size: labelSize, 
                 weight: FontWeight.w100
               ),
             ),

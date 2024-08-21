@@ -13,8 +13,6 @@ class FeaturedCarsHolder extends StatelessWidget {
     return InkWell(
       onTap: () => adminHomeScreenController.changePage(6),
       child: Ink(
-        height: screenSize.height/5,
-        width: screenSize.width/5,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(screenSize.width/100),
           color: sideBarColor
