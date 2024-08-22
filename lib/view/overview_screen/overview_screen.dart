@@ -19,57 +19,7 @@ class OverviewScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if(Responsive.isDesktop(context) || Responsive.isTablet(context)){
-      return Scaffold(
-        backgroundColor: colorBlack,      
-        body: Padding(
-          padding: EdgeInsets.all(screenSize.width / 120),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              TextWidget(
-                text: 'Overview',
-                color: colorWhite,
-                size: screenSize.width / 70,
-                weight: FontWeight.bold,
-              ),
-              SizedBox(height: screenSize.height / 100),
-              SizedBox(
-                height: screenSize.height/5,
-                child: Row(
-                  children: [
-                    Expanded(child: TotalSellersHolder(screenSize: screenSize, adminHomeScreenController: adminHomeScreenController)),
-                    SizedBox(width: screenSize.width / 220),
-                    Expanded(child: TotalUsersHolder(screenSize: screenSize, adminHomeScreenController: adminHomeScreenController)),
-                    SizedBox(width: screenSize.width / 220),
-                    Expanded(child: RevenueEarnedHolder(screenSize: screenSize, adminHomeScreenController: adminHomeScreenController)),
-                  ],
-                ),
-              ),
-              SizedBox(height: screenSize.height / 100),
-              SizedBox(
-                height: screenSize.height/5,
-                child: Row(
-                  children: [
-                    Expanded(child: AllCarsToSellHolder(screenSize: screenSize, adminHomeScreenController: adminHomeScreenController)),
-                    SizedBox(width: screenSize.width / 220),
-                    Expanded(child: SoldCarsHolder(screenSize: screenSize, adminHomeScreenController: adminHomeScreenController)),
-                    SizedBox(width: screenSize.width / 220),
-                    Expanded(child: FeaturedCarsHolder(adminHomeScreenController: adminHomeScreenController, screenSize: screenSize)),
-                  ],
-                ),
-              ),
-              SizedBox(height: screenSize.height / 25),
-              TextWidget(
-                text: 'Revenue Chart',
-                color: colorWhite,
-                size: screenSize.width / 80,
-                weight: FontWeight.bold,
-              ),
-              Expanded(child: RevenuePieChartHolder(screenSize: screenSize)),
-            ],
-          ),
-        ),
-      );
+      return OverviewDesktopAndTablet(screenSize: screenSize, adminHomeScreenController: adminHomeScreenController);
     }
     else{
       return Scaffold(
@@ -90,9 +40,9 @@ class OverviewScreen extends StatelessWidget {
                 height: screenSize.height/8,
                 child: Row(
                   children: [
-                    Expanded(child: TotalSellersHolder(screenSize: screenSize, adminHomeScreenController: adminHomeScreenController,)),
+                    Expanded(child: TotalSellersHolder(screenSize: screenSize, adminHomeScreenController: adminHomeScreenController,totalSellerFontSize: screenSize.width/17,)),
                     SizedBox(width: screenSize.width / 150),
-                    Expanded(child: TotalUsersHolder(screenSize: screenSize, adminHomeScreenController: adminHomeScreenController)),                    
+                    Expanded(child: TotalUsersHolder(screenSize: screenSize, adminHomeScreenController: adminHomeScreenController,totalUsersFontSize: screenSize.width/17,)),                    
                   ],
                 ),
               ),
@@ -101,9 +51,9 @@ class OverviewScreen extends StatelessWidget {
                 height: screenSize.height/8,
                 child: Row(
                   children: [
-                    Expanded(child: RevenueEarnedHolder(screenSize: screenSize, adminHomeScreenController: adminHomeScreenController)),
+                    Expanded(child: RevenueEarnedHolder(screenSize: screenSize, adminHomeScreenController: adminHomeScreenController,totalRevenueFontSize: screenSize.width/17,)),
                     SizedBox(width: screenSize.width / 150),
-                    Expanded(child: AllCarsToSellHolder(screenSize: screenSize, adminHomeScreenController: adminHomeScreenController)),
+                    Expanded(child: AllCarsToSellHolder(screenSize: screenSize, adminHomeScreenController: adminHomeScreenController,totalCarsToSellFontSize: screenSize.width/17,)),
                   ],
                 ),
               ),
@@ -112,16 +62,92 @@ class OverviewScreen extends StatelessWidget {
                 height: screenSize.height/8,
                 child: Row(
                   children: [
-                    Expanded(child: SoldCarsHolder(screenSize: screenSize, adminHomeScreenController: adminHomeScreenController)),
+                    Expanded(child: SoldCarsHolder(screenSize: screenSize, adminHomeScreenController: adminHomeScreenController,totalSoldCarsFontSize: screenSize.width/17,)),
                     SizedBox(width: screenSize.width / 150),
-                    Expanded(child: FeaturedCarsHolder(adminHomeScreenController: adminHomeScreenController, screenSize: screenSize)),
+                    Expanded(child: FeaturedCarsHolder(adminHomeScreenController: adminHomeScreenController, screenSize: screenSize,totalFeaturedCarsFontSize: screenSize.width/17,)),
                   ],
                 ),
               ),
+              SizedBox(height: screenSize.height / 25),
+              TextWidget(
+                text: 'Revenue Chart',
+                color: colorWhite,
+                size: screenSize.width / 25,
+                weight: FontWeight.bold,
+              ),
+              Expanded(child: RevenuePieChartHolder(screenSize: screenSize)),
             ],
           ),
         ),
       );
     }
+  }
+}
+
+
+
+class OverviewDesktopAndTablet extends StatelessWidget {
+  const OverviewDesktopAndTablet({
+    super.key,
+    required this.screenSize,
+    required this.adminHomeScreenController,
+  });
+
+  final Size screenSize;
+  final AdminHomeScreenController adminHomeScreenController;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: colorBlack,      
+      body: Padding(
+        padding: EdgeInsets.all(screenSize.width / 120),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            TextWidget(
+              text: 'Overview',
+              color: colorWhite,
+              size: screenSize.width / 70,
+              weight: FontWeight.bold,
+            ),
+            SizedBox(height: screenSize.height / 100),
+            SizedBox(
+              height: screenSize.height/5,
+              child: Row(
+                children: [
+                  Expanded(child: TotalSellersHolder(screenSize: screenSize, adminHomeScreenController: adminHomeScreenController,totalSellerFontSize: screenSize.width/60,)),
+                  SizedBox(width: screenSize.width / 220),
+                  Expanded(child: TotalUsersHolder(screenSize: screenSize, adminHomeScreenController: adminHomeScreenController,totalUsersFontSize: screenSize.width/60,)),
+                  SizedBox(width: screenSize.width / 220),
+                  Expanded(child: RevenueEarnedHolder(screenSize: screenSize, adminHomeScreenController: adminHomeScreenController,totalRevenueFontSize: screenSize.width/60,)),
+                ],
+              ),
+            ),
+            SizedBox(height: screenSize.height / 100),
+            SizedBox(
+              height: screenSize.height/5,
+              child: Row(
+                children: [
+                  Expanded(child: AllCarsToSellHolder(screenSize: screenSize, adminHomeScreenController: adminHomeScreenController,totalCarsToSellFontSize: screenSize.width/60,)),
+                  SizedBox(width: screenSize.width / 220),
+                  Expanded(child: SoldCarsHolder(screenSize: screenSize, adminHomeScreenController: adminHomeScreenController,totalSoldCarsFontSize: screenSize.width/60,)),
+                  SizedBox(width: screenSize.width / 220),
+                  Expanded(child: FeaturedCarsHolder(adminHomeScreenController: adminHomeScreenController, screenSize: screenSize,totalFeaturedCarsFontSize: screenSize.width/60,)),
+                ],
+              ),
+            ),
+            SizedBox(height: screenSize.height / 25),
+            TextWidget(
+              text: 'Revenue Chart',
+              color: colorWhite,
+              size: screenSize.width / 80,
+              weight: FontWeight.bold,
+            ),
+            Expanded(child: RevenuePieChartHolder(screenSize: screenSize)),
+          ],
+        ),
+      ),
+    );
   }
 }

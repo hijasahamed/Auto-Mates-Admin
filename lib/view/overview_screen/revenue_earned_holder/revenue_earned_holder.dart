@@ -10,10 +10,12 @@ class RevenueEarnedHolder extends StatelessWidget {
     super.key,
     required this.screenSize,
     required this.adminHomeScreenController,
+    required this.totalRevenueFontSize
   });
 
   final Size screenSize;
   final AdminHomeScreenController adminHomeScreenController;
+  final double totalRevenueFontSize;
 
   @override
   Widget build(BuildContext context) {
@@ -21,11 +23,11 @@ class RevenueEarnedHolder extends StatelessWidget {
       onTap: () => adminHomeScreenController.changePage(3),
       child: Ink(
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(screenSize.width / 100),
+          borderRadius: BorderRadius.circular(totalRevenueFontSize/2),
           color: sideBarColor,
         ),
         child: Padding(
-          padding: EdgeInsets.all(screenSize.width / 100),
+          padding: EdgeInsets.all(totalRevenueFontSize/2),
           child: Column(
             children: [
               Row(
@@ -34,16 +36,17 @@ class RevenueEarnedHolder extends StatelessWidget {
                   TextWidget(
                     text: 'Revenue Earned',
                     color: colorWhite,
-                    size: screenSize.width / 100,
+                    size: totalRevenueFontSize/2,
                     weight: FontWeight.bold,
                   ),
-                  const Icon(
+                  Icon(
                     Icons.currency_rupee_sharp,
                     color: Colors.green,
+                    size: totalRevenueFontSize,
                   ),
                 ],
               ),
-              TotalRevenueEarned(screenSize: screenSize),
+              TotalRevenueEarned(screenSize: screenSize,totalRevenueFontSize: totalRevenueFontSize,),
             ],
           ),
         ),
@@ -56,11 +59,13 @@ class TotalRevenueEarned extends StatelessWidget {
   const TotalRevenueEarned({
     super.key,
     required this.screenSize,
+    required this.totalRevenueFontSize,
     this.isRevenueScreen,
   });
 
   final Size screenSize;
   final bool? isRevenueScreen;
+  final double totalRevenueFontSize;
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +79,7 @@ class TotalRevenueEarned extends StatelessWidget {
           return TextWidget(
             text: 'No documents found',
             color: colorWhite,
-            size: screenSize.width / 100,
+            size: totalRevenueFontSize/2,
             weight: FontWeight.w500,
           );
         }
@@ -82,7 +87,7 @@ class TotalRevenueEarned extends StatelessWidget {
           return TextWidget(
             text: '0',
             color: colorWhite,
-            size: screenSize.width / 30,
+            size: totalRevenueFontSize/2,
             weight: FontWeight.w500,
           );
         }
@@ -93,7 +98,7 @@ class TotalRevenueEarned extends StatelessWidget {
         return TextWidget(
           text: '₹${formattedAmount.toString()}',
           color: (isRevenueScreen == true) ? Colors.green : colorWhite,
-          size: screenSize.width / 60,
+          size: totalRevenueFontSize,
           weight: FontWeight.bold,
         );
       },

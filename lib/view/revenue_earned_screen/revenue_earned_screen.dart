@@ -27,6 +27,7 @@ class RevenueEarnedScreen extends StatelessWidget {
                 TotalRevenueEarned(
                   screenSize: screenSize,
                   isRevenueScreen: true,
+                  totalRevenueFontSize: screenSize.width/60,
                 ),
               ],
             ),

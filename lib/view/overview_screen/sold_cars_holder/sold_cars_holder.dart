@@ -5,27 +5,28 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class SoldCarsHolder extends StatelessWidget {
-  const SoldCarsHolder({super.key,required this.screenSize,required this.adminHomeScreenController});
+  const SoldCarsHolder({super.key,required this.screenSize,required this.adminHomeScreenController,required this.totalSoldCarsFontSize});
   final Size screenSize;
   final AdminHomeScreenController adminHomeScreenController;
+  final double totalSoldCarsFontSize;
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () => adminHomeScreenController.changePage(5),
       child: Ink(
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(screenSize.width/100),
+          borderRadius: BorderRadius.circular(totalSoldCarsFontSize/2),
           color: sideBarColor
         ),
         child: Padding(
-          padding: EdgeInsets.all(screenSize.width/100),
+          padding: EdgeInsets.all(totalSoldCarsFontSize/2),
           child: Column(
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  TextWidget(text: 'Sold Cars', color: colorWhite, size: screenSize.width/100, weight: FontWeight.bold),
-                  const Icon(Icons.check_circle, color: Colors.green)
+                  TextWidget(text: 'Sold Cars', color: colorWhite, size: totalSoldCarsFontSize/2, weight: FontWeight.bold),
+                  Icon(Icons.check_circle, color: Colors.green,size: totalSoldCarsFontSize,)
                 ],
               ),
               Expanded(
@@ -37,13 +38,13 @@ class SoldCarsHolder extends StatelessWidget {
                         return const CircularProgressIndicator(color: Colors.blue,);
                       }
                       if (snapshot.hasError) {
-                        return TextWidget(text: 'No documents found', color: colorWhite, size: screenSize.width/100, weight: FontWeight.w500);
+                        return TextWidget(text: 'No documents found', color: colorWhite, size: totalSoldCarsFontSize/2, weight: FontWeight.w500);
                       }
                       if (!snapshot.hasData) {
-                        return TextWidget(text: 'No documents found', color: colorWhite, size: screenSize.width/100, weight: FontWeight.w500);
+                        return TextWidget(text: 'No documents found', color: colorWhite, size: totalSoldCarsFontSize/2, weight: FontWeight.w500);
                       }
                       final count = snapshot.data!.docs.length;
-                      return TextWidget(text: count.toString(), color: colorWhite, size: screenSize.width/60, weight: FontWeight.bold);
+                      return TextWidget(text: count.toString(), color: colorWhite, size: totalSoldCarsFontSize, weight: FontWeight.bold);
                     },
                   ),
                 )
