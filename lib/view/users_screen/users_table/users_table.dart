@@ -21,7 +21,7 @@ class UsersTable extends StatelessWidget {
       flex: 95,
       child: Container(
         decoration: BoxDecoration(
-          color: sideBarItemColor,
+          color: sideBarColor,
           borderRadius: BorderRadius.circular(screenSize.width / 185),
         ),
         child: Padding(
