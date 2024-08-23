@@ -32,6 +32,25 @@ class AdminUserController extends GetxController {
     update();
   }
 
+  var userSearchQuery = ''.obs; 
+
+  void updateSearchQuery(String query) {
+    userSearchQuery.value = query.toLowerCase();
+  }
+
+  List<Map<String, dynamic>> getFilteredSellers(List<Map<String, dynamic>> allUsers) {
+    if (userSearchQuery.isEmpty) {
+      return allUsers;
+    } else {
+      return allUsers.where((user) {
+        return user['userName']
+            .toString()
+            .toLowerCase()
+            .contains(userSearchQuery.value);
+      }).toList();
+    }
+  }
+
 }
 
 class AdminSellerController extends GetxController{
@@ -56,4 +75,25 @@ class AdminSellerController extends GetxController{
     currentPage.value--;
     update();
   }
+
+
+  var searchQuery = ''.obs; 
+
+  void updateSearchQuery(String query) {
+    searchQuery.value = query.toLowerCase();
+  }
+
+  List<Map<String, dynamic>> getFilteredSellers(List<Map<String, dynamic>> allSellers) {
+    if (searchQuery.isEmpty) {
+      return allSellers;
+    } else {
+      return allSellers.where((seller) {
+        return seller['companyName']
+            .toString()
+            .toLowerCase()
+            .contains(searchQuery.value);
+      }).toList();
+    }
+  }
+
 }
