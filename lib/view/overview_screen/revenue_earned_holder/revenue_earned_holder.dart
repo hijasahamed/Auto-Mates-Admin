@@ -79,7 +79,7 @@ class TotalRevenueEarned extends StatelessWidget {
           return TextWidget(
             text: 'No documents found',
             color: colorWhite,
-            size: totalRevenueFontSize/2,
+            size: totalRevenueFontSize,
             weight: FontWeight.w500,
           );
         }
@@ -87,7 +87,7 @@ class TotalRevenueEarned extends StatelessWidget {
           return TextWidget(
             text: '0',
             color: colorWhite,
-            size: totalRevenueFontSize/2,
+            size: totalRevenueFontSize,
             weight: FontWeight.w500,
           );
         }

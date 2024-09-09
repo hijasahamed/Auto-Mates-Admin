@@ -5,8 +5,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-const String adminUserName = 'hijas';
-const String adminPassword = '1234';
+const String adminUserName = 'admin';
+const String adminPassword = '12345';
 
 void loginAdmin ({required userPasswordController,required userNameController,context}){
   if(userNameController.text != adminUserName && userPasswordController.text == adminPassword){
@@ -50,7 +50,7 @@ void loginAdmin ({required userPasswordController,required userNameController,co
     );
   }
   else{
-    Get.to(
+    Get.off(
       const AdminHomeScreen(),
       fullscreenDialog: true,
       transition: Transition.fadeIn,
