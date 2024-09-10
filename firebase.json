@@ -1,1 +1,16 @@
-{"flutter":{"platforms":{"dart":{"lib/firebase_options.dart":{"projectId":"auto-mates-e8ebe","configurations":{"web":"1:770714286776:web:1646959daa5868f9a7124d"}}}}}}
+{
+  "hosting": {
+    "public": "build/web",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}
