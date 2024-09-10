@@ -1,5 +1,6 @@
 import 'package:auto_mates_admin/controller/function_controllers.dart';
 import 'package:auto_mates_admin/view/common_widgets/text_widget.dart';
+import 'package:auto_mates_admin/view/responsive.dart';
 import 'package:flutter/material.dart';
 
 class AdminLoginButton extends StatelessWidget {
@@ -16,7 +17,7 @@ class AdminLoginButton extends StatelessWidget {
             loginAdmin(userPasswordController: userPasswordController, userNameController: userNameController);           
           },
           child: Ink(
-            height: screenSize.height/14,
+            height: Responsive.isDesktop(context) || Responsive.isTablet(context)? screenSize.height/14 : screenSize.height/25,
             width: screenSize.width/4,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(screenSize.width/200),
@@ -26,7 +27,7 @@ class AdminLoginButton extends StatelessWidget {
               child: TextWidget(
                 text: 'Login',
                 color: Colors.white,
-                size: screenSize.width / 85,
+                size: Responsive.isDesktop(context) || Responsive.isTablet(context)?screenSize.width/85 : screenSize.width/40,
                 weight: FontWeight.w500,
               ),
             ),

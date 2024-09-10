@@ -2,6 +2,7 @@ import 'package:auto_mates_admin/view/admin_login_screen/admin_login_box/admin_l
 import 'package:auto_mates_admin/view/admin_login_screen/admin_login_box/admin_login_text_form/admin_login_text_form.dart';
 import 'package:auto_mates_admin/view/common_widgets/colors.dart';
 import 'package:auto_mates_admin/view/common_widgets/text_widget.dart';
+import 'package:auto_mates_admin/view/responsive.dart';
 import 'package:flutter/material.dart';
 
 class AdminLoginBox extends StatelessWidget {
@@ -14,11 +15,11 @@ class AdminLoginBox extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        TextWidget(text: 'Auto Mates', color: colorBlack, size: screenSize.width/40, weight: FontWeight.bold),
+        TextWidget(text: 'Auto Mates', color: colorBlack, size: Responsive.isDesktop(context) || Responsive.isTablet(context)?screenSize.width/30 : screenSize.width/20, weight: FontWeight.bold),
         SizedBox(height: screenSize.height/40,),
         Container(
-          height: screenSize.height/1.5,
-          width: screenSize.width/3.0,
+          height: Responsive.isDesktop(context) || Responsive.isTablet(context)?screenSize.height/1.5 : screenSize.height/2.9,
+          width: Responsive.isDesktop(context) || Responsive.isTablet(context)? screenSize.width/3.0 : screenSize.width/1.2,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(screenSize.width/100),
             color: colorWhite
@@ -26,9 +27,9 @@ class AdminLoginBox extends StatelessWidget {
           child: Padding(
             padding: EdgeInsets.all(screenSize.width/100),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: Responsive.isDesktop(context) || Responsive.isTablet(context)?MainAxisAlignment.center : MainAxisAlignment.start,
               children: [
-                TextWidget(text: 'Admin Login', color: colorBlueGrey, size: screenSize.width/60, weight: FontWeight.bold),
+                TextWidget(text: 'Admin Login', color: colorBlueGrey, size: Responsive.isDesktop(context) || Responsive.isTablet(context)?screenSize.width/60 : screenSize.width/30, weight: FontWeight.bold),
                 AdminLoginTextForm(screenSize: screenSize,labelText: 'Username',prefixIcon: Icons.person,controller: userNameController,),
                 AdminLoginTextForm(screenSize: screenSize,labelText: 'Password',prefixIcon: Icons.remove_red_eye,controller: userPasswordController,obscure: true,),
                 SizedBox(height: screenSize.height/30,),

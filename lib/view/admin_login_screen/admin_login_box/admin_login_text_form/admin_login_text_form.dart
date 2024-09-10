@@ -1,4 +1,5 @@
 import 'package:auto_mates_admin/view/common_widgets/colors.dart';
+import 'package:auto_mates_admin/view/responsive.dart';
 import 'package:flutter/material.dart';
 
 class AdminLoginTextForm extends StatelessWidget {
@@ -18,7 +19,7 @@ class AdminLoginTextForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(16.0),
+      padding: EdgeInsets.all(Responsive.isDesktop(context) || Responsive.isTablet(context)?screenSize.width/60 :screenSize.width/30),
       child: TextFormField(
         controller: controller,
         obscureText: (obscure == true)? true : false,
@@ -26,7 +27,7 @@ class AdminLoginTextForm extends StatelessWidget {
         decoration: InputDecoration(
           labelText: labelText,
           labelStyle: TextStyle(
-            color: Colors.grey[700],fontSize: screenSize.width/80,
+            color: Colors.grey[700],fontSize: Responsive.isDesktop(context) || Responsive.isTablet(context)?screenSize.width/80 : screenSize.width/40,
           ),
           filled: true,
           fillColor: loginBackgroundColor,
