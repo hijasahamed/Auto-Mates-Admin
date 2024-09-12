@@ -1,5 +1,5 @@
 import 'package:auto_mates_admin/view/common_widgets/colors.dart';
-import 'package:auto_mates_admin/view/responsive.dart';
+import 'package:auto_mates_admin/model/responsive.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';

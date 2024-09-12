@@ -4,7 +4,7 @@ import 'package:auto_mates_admin/view/admin_home_screen/admin_home_screen_side_b
 import 'package:auto_mates_admin/view/all_car_to_sell_screen/all_car_to_sell_screen.dart';
 import 'package:auto_mates_admin/view/common_widgets/text_widget.dart';
 import 'package:auto_mates_admin/view/featured_cars_screen/featured_cars_screen.dart';
-import 'package:auto_mates_admin/view/responsive.dart';
+import 'package:auto_mates_admin/model/responsive.dart';
 import 'package:auto_mates_admin/view/revenue_earned_screen/revenue_earned_screen.dart';
 import 'package:auto_mates_admin/view/common_widgets/colors.dart';
 import 'package:auto_mates_admin/view/overview_screen/overview_screen.dart';

@@ -2,7 +2,7 @@ import 'package:auto_mates_admin/view/admin_login_screen/admin_login_box/admin_l
 import 'package:auto_mates_admin/view/admin_login_screen/admin_login_box/admin_login_text_form/admin_login_text_form.dart';
 import 'package:auto_mates_admin/view/common_widgets/colors.dart';
 import 'package:auto_mates_admin/view/common_widgets/text_widget.dart';
-import 'package:auto_mates_admin/view/responsive.dart';
+import 'package:auto_mates_admin/model/responsive.dart';
 import 'package:flutter/material.dart';
 
 class AdminLoginBox extends StatelessWidget {
